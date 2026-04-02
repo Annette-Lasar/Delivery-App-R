@@ -1,0 +1,33 @@
+/* ==============================================================
+Colors
+=================================================================*/
+:root {
+    /* plain colors */
+  --white-100: #ffffff;
+
+  --black-1000: #000000;
+  --gray-800: #444341;
+  --gray-900: #363534;
+
+  --orange-600: #e76c1f;
+
+  --orange-50: #fdf0e7;
+  --orange-100: #fdeadc;
+
+
+  --text-color-light: var(--white-100); 
+  --text-color-medium: var(--orange-100);
+  --text-color-medium-dark: var(--orange-600);
+  --text-color-dark: var(--gray-900);
+
+  --bg-color-page: var(--white-100);
+  --bg-color-banners: var(--orange-600); 
+  --bg-color-mobile-nav: var(--gray-900);
+  --bg-color-cart: var(--gray-900);
+  --bg-color-dish: var(--orange-100); 
+
+
+  /* widths and heights */
+  --header-height: 80px; 
+  --mobile-navbar-height: 80px;
+}

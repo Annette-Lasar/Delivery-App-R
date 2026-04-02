@@ -1,0 +1,307 @@
+/* ===============================================================
+General styles
+=================================================================*/
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: var(--header-height) 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  font-family: "Palanquin", sans-serif;
+  width: 100%;
+  background-color: var(--bg-color-page);
+}
+
+/* ===============================================================
+Typography
+=================================================================*/
+h1,
+h2 {
+  font-family: "Palanquin Dark", sans-serif;
+}
+
+h1 {
+  margin: 0 0 0.5em;
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h2 {
+  padding: 0.5em 1em;
+  font-size: clamp(1.8rem, 2vw, 3rem);
+  color: white;
+  background-color: #e76c1f;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+/* ===============================================================
+Header
+=================================================================*/
+header {
+  height: var(--header-height);
+  grid-area: header;
+  background-color: #e76c1f;
+}
+
+.header-logo-wrapper {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1em 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: block;
+  width: 92px;
+  height: 38px;
+}
+
+.fake-burger-menu {
+  display: none;
+}
+
+/* ===============================================================
+Main
+=================================================================*/
+main {
+  grid-area: main;
+}
+
+/* ===============================================================
+Hero section
+=================================================================*/
+.hero-img-wrapper {
+  margin: 1em auto 0;
+  height: clamp(100px, 35vh, 400px);
+  /* aspect-ratio: 1 / 1; */
+  position: relative;
+  max-width: 95%;
+  background-image: url("../assets/img/IndonesischesEssen.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+}
+
+.roman-logo {
+  width: 150px;
+  height: 150px;
+  background-color: #fdf0e7;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: -75px;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  border: 4px solid white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.roman-logo img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.small-info {
+  height: 100%;
+  padding: 5em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.star-wrapper {
+  margin: 0 0 1em;
+  padding: 0 0 0.5em;
+  text-align: center;
+}
+
+.star {
+  height: 28px;
+}
+
+.star.transparent {
+  height: 26px;
+}
+
+.slogan {
+  text-align: center;
+}
+
+/* ===============================================================
+Menu section
+=================================================================*/
+.menu-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.menu-overview {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.dishes {
+  max-width: 600px;
+  padding: 0 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  background-color: #fdeadc;
+  border-radius: 12px;
+}
+
+.dish-img-wrapper {
+  width: 30%;
+}
+
+.dish-information {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2fr);
+  grid-template-areas:
+    "title price"
+    "description description"
+    "button button";
+}
+
+.dish-title {
+  grid-area: title;
+}
+
+.dish-price {
+  grid-area: price;
+  justify-self: flex-end;
+}
+
+.dish-description {
+  grid-area: description;
+}
+
+.add-to-cart-btn {
+  grid-area: button;
+  padding: 0.5em 1em;
+  width: fit-content;
+  justify-self: flex-end;
+}
+
+.dish-img-wrapper {
+  height: 120px;
+  overflow: hidden;
+}
+
+/* ===============================================================
+Shopping cart
+=================================================================*/
+.basket {
+  display: none;
+}
+
+/* ===============================================================
+Mobile navigation
+=================================================================*/
+aside {
+  height: var(--mobile-navbar-height);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-color-mobile-nav);
+}
+
+nav {
+  height: 100%;
+}
+
+.nav-menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav-menu li {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu li a {
+  height: 70px;
+  width: 70px;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--gray-800);
+}
+
+/* ===============================================================
+Footer
+=================================================================*/
+footer {
+  padding: 0 0 80px;
+  grid-area: footer;
+  background-color: var(--orange-600);
+}
+
+.inner-footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+
+.footer-link {
+  margin: 0 0 0.5em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: var(--white-100);
+}
+
+/* ===============================================================
+Media Queries
+=================================================================*/
+@media (min-width: 50em) {
+  .fake-burger-menu {
+    display: none;
+  }
+
+  .basket {
+    display: block;
+    height: fit-content;
+    min-width: 400px;
+    background-color: #363534;
+    color: #fdeadc;
+    border: orchid 3px solid;
+  }
+}
