@@ -3,8 +3,8 @@ function init() {
 }
 
 function renderMenu() {
-  const menuOverview = document.getElementById("menu_overview");
-  menuOverview.innerHTML = "";
+  const menuOverview = document.getElementById('menu_overview');
+  menuOverview.innerHTML = '';
 
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
@@ -26,16 +26,28 @@ function addToCart(j) {
   // aktuelles Gericht in den Warenkorb legen
   // Warenkorb auf der Konsole ausgeben
 
-  console.log("Warenkorb: ", shoppingCart);
+  console.log('Warenkorb: ', shoppingCart);
   const currentDish = dishes[j];
   const newDish = {
     name: currentDish.name,
     price: currentDish.price,
     amount: 1,
   };
-  console.log("aktuelles Gericht: ", newDish.name);
-  shoppingCart.push(newDish);
-  console.log("Warenkorb: ", shoppingCart);
+  // console.log('aktuelles Gericht: ', newDish.name);
+  // shoppingCart.push(newDish);
+  // console.log('Warenkorb: ', shoppingCart);
+  renderCart();
+}
+
+function renderCart() {
+  const innerBasket = document.getElementById('inner_basket');
+  innerBasket.innerHTML = '';
+
+  for (let i = 0; i < shoppingCart; i++) {
+    const item = shoppingCart[i];
+
+    innerBasket.innerHTML += generateCartContentHTML(i, item);
+  }
 }
 
 init();
