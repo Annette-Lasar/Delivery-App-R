@@ -1,10 +1,11 @@
 function init() {
   renderMenu();
+  renderCart();
 }
 
 function renderMenu() {
-  const menuOverview = document.getElementById('menu_overview');
-  menuOverview.innerHTML = '';
+  const menuOverview = document.getElementById("menu_overview");
+  menuOverview.innerHTML = "";
 
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
@@ -21,33 +22,83 @@ function renderMenu() {
 }
 
 function addToCart(j) {
-  // Warenkorb auf der Konsole ausgeben
-  // aktuelles Gericht festlegen
-  // aktuelles Gericht in den Warenkorb legen
-  // Warenkorb auf der Konsole ausgeben
-
-  console.log('Warenkorb: ', shoppingCart);
+  //leeren warenkorb anzeigen
+  //gib mir aktuele gericht aus
+  //das aktuele gericht in den Warenkorb hinzufügen
+  //den warenkorb in der console ausgeben
   const currentDish = dishes[j];
-  const newDish = {
-    name: currentDish.name,
-    price: currentDish.price,
-    amount: 1,
-  };
-  // console.log('aktuelles Gericht: ', newDish.name);
-  // shoppingCart.push(newDish);
-  // console.log('Warenkorb: ', shoppingCart);
+
+  const existingDish = shoppingCart.find(function (dish) {
+    return dish.id === currentDish.id;
+  });
+
+  if (existingDish) {
+    existingDish.amount++;
+    console.log("gericht erhöht: ", existingDish.name);
+  } else {
+    const newDish = {
+      id: currentDish.id,
+      name: currentDish.name,
+      price: currentDish.price,
+      amount: 1,
+    };
+    shoppingCart.push(newDish);
+    console.log("neues Gericht hinzugefügt: ", newDish.name);
+  }
+
+  console.log("warenkorb: ", shoppingCart);
+
   renderCart();
 }
 
 function renderCart() {
-  const innerBasket = document.getElementById('inner_basket');
-  innerBasket.innerHTML = '';
+  const innerBasket = document.getElementById("inner_basket");
+  innerBasket.innerHTML = "";
 
-  for (let i = 0; i < shoppingCart; i++) {
+  for (let i = 0; i < shoppingCart.length; i++) {
     const item = shoppingCart[i];
 
-    innerBasket.innerHTML += generateCartContentHTML(i, item);
+    innerBasket.innerHTML += generateShoppingCartHTML(i, item);
   }
+}
+
+function increaseAmount(i) {
+  //im wagen um 1 erhön
+  //
+  let currentItemAmount = shoppingCart[i].amount;
+
+  currentItemAmount++;
+
+  shoppingCart[i].amount = currentItemAmount;
+
+  renderCart();
+}
+
+function decreaseAmount(i) {
+  let currentItemAmount = shoppingCart[i].amount;
+
+  if (currentItemAmount > 1) {
+    currentItemAmount--;
+    shoppingCart[i].amount = currentItemAmount;
+  } else if (currentItemAmount <= 1) {
+    deleteDishes(i);
+  }
+
+  renderCart();
+}
+
+function deleteDishes(i) {
+  shoppingCart.splice(i, 1);
+
+  renderCart();
+}
+
+function calculateSubtotal() {
+  //code hier
+}
+
+function calculateTotal() {
+  //code hier
 }
 
 init();

@@ -10,7 +10,7 @@ function generatMenuListHTML(j, dish) {
     </div>
     <div class="dish-information">
       <h3 class="dish-title">${dish.name}</h3>
-      <p class="dish-price">${dish.price.toFixed(2).replace('.', ',')} €</p>
+      <p class="dish-price">${dish.price.toFixed(2).replace(".", ",")} €</p>
       <p class="dish-description">${dish.description}</p>
       <button class="add-to-cart-btn" onclick="addToCart(${j})">Add to basket</button>
     </div>
@@ -19,12 +19,21 @@ function generatMenuListHTML(j, dish) {
   `;
 }
 
-function generateCartContentHTML(i, item) {
+function generateShoppingCartHTML(i, item) {
   return /* html */ `
-     <article>
-      <div>${item.amount}</div>
-      <div>${item.name}</div>
-      <div>${item.price}</div>
-     </article>
-  `;
+<article class="cart-item">
+  <div>
+     <p>${item.amount} <span>x</span></p>
+     <p>${item.name}</p>
+ </div>
+
+ <div>
+      <button onclick="deleteDishes(${i})">x</button>
+      <button onclick="decreaseAmount(${i})">-1</button>
+      <button onclick="increaseAmount(${i})">1+</button>
+      <p>${item.price.toFixed(2).replace(".", ",")} €</p>
+ </div>
+
+</article>
+    `;
 }
