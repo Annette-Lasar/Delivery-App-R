@@ -136,4 +136,4 @@ const categories = ["Vorspeisen", "Hauptgerichte", "Nachspeisen", "Getränke"];
 
 const shoppingCart = [];
 
-const deliveryFee = 4.99;
+const deliveryFee = 4;

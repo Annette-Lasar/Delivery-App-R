@@ -22,10 +22,6 @@ function renderMenu() {
 }
 
 function addToCart(j) {
-  //leeren warenkorb anzeigen
-  //gib mir aktuele gericht aus
-  //das aktuele gericht in den Warenkorb hinzufügen
-  //den warenkorb in der console ausgeben
   const currentDish = dishes[j];
 
   const existingDish = shoppingCart.find(function (dish) {
@@ -43,11 +39,12 @@ function addToCart(j) {
       amount: 1,
     };
     shoppingCart.push(newDish);
-    console.log("neues Gericht hinzugefügt: ", newDish.name);
+    // console.log("neues Gericht hinzugefügt: ", newDish.name);
   }
 
-  console.log("warenkorb: ", shoppingCart);
+  // console.log("warenkorb: ", shoppingCart);
 
+  calculateTotal();
   renderCart();
 }
 
@@ -63,14 +60,13 @@ function renderCart() {
 }
 
 function increaseAmount(i) {
-  //im wagen um 1 erhön
-  //
   let currentItemAmount = shoppingCart[i].amount;
 
   currentItemAmount++;
 
   shoppingCart[i].amount = currentItemAmount;
 
+  calculateTotal();
   renderCart();
 }
 
@@ -84,21 +80,40 @@ function decreaseAmount(i) {
     deleteDishes(i);
   }
 
+  calculateTotal();
   renderCart();
 }
 
 function deleteDishes(i) {
   shoppingCart.splice(i, 1);
 
+  calculateTotal();
   renderCart();
 }
 
 function calculateSubtotal() {
-  //code hier
+  let subtotal = 0;
+  for (let i = 0; i < shoppingCart.length; i++) {
+    const itemPrice = shoppingCart[i].price;
+    const itemAmount = shoppingCart[i].amount;
+
+    const sum = itemPrice * itemAmount;
+    subtotal += sum;
+  }
+  console.log(`Zwischensumme:  ${subtotal.toFixed(2).replace(".", ",")} €`);
+  return subtotal; 
 }
 
 function calculateTotal() {
-  //code hier
+  let total = 0;
+  const subtotal = calculateSubtotal();
+  if (shoppingCart.length > 0) {
+    total = subtotal + deliveryFee;
+    console.log(`Endsumme: ${total.toFixed(2).replace(".", ",")} €`);
+  } else {
+    total = subtotal;
+    console.log(`Endsumme: ${subtotal.toFixed(2).replace(".", ",")} €`);
+  }
 }
 
 init();
