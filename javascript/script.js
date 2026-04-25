@@ -39,10 +39,8 @@ function addToCart(j) {
       amount: 1,
     };
     shoppingCart.push(newDish);
-    // console.log("neues Gericht hinzugefügt: ", newDish.name);
   }
 
-  // console.log("warenkorb: ", shoppingCart);
 
   calculateTotal();
   renderCart();
@@ -51,6 +49,11 @@ function addToCart(j) {
 function renderCart() {
   const innerBasket = document.getElementById("inner_basket");
   innerBasket.innerHTML = "";
+
+  if (shoppingCart.length === 0) {
+    innerBasket.innerHTML = generateEmptyBasketHTML();
+    return;
+  }
 
   for (let i = 0; i < shoppingCart.length; i++) {
     const item = shoppingCart[i];
@@ -101,7 +104,7 @@ function calculateSubtotal() {
     subtotal += sum;
   }
   console.log(`Zwischensumme:  ${subtotal.toFixed(2).replace(".", ",")} €`);
-  return subtotal; 
+  return subtotal;
 }
 
 function calculateTotal() {
@@ -114,6 +117,11 @@ function calculateTotal() {
     total = subtotal;
     console.log(`Endsumme: ${subtotal.toFixed(2).replace(".", ",")} €`);
   }
+  // renderPrices(subtotal, total); 
 }
+
+// function renderPrices(subtotal, total) {
+//   const subtotalBox = document.getElementById(``)
+// }
 
 init();

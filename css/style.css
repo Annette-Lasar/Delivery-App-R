@@ -40,8 +40,12 @@ h1 {
 h2 {
   padding: 0.5em 1em;
   font-size: clamp(1.8rem, 2vw, 3rem);
-  color: white;
-  background-color: #e76c1f;
+  color: var(--text-color-medium);
+  background-color: var(--bg-color-banners);
+}
+
+.cart-heading {
+  background-color: var(--bg-color-cart);
 }
 
 p {
@@ -54,7 +58,7 @@ Header
 header {
   height: var(--header-height);
   grid-area: header;
-  background-color: #e76c1f;
+  background-color: var(--bg-color-banners);
 }
 
 .header-logo-wrapper {
@@ -102,7 +106,7 @@ Hero section
 .roman-logo {
   width: 150px;
   height: 150px;
-  background-color: #fdf0e7;
+  background-color: var(--bg-color-light);
   border-radius: 50%;
 
   display: flex;
@@ -113,8 +117,8 @@ Hero section
   bottom: -75px;
   left: 50%;
   transform: translate(-50%, -10%);
-  border: 4px solid white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 4px solid var(--border-color-light);
+  box-shadow: 0 4px 10px var(--box-shadow);
 }
 
 .roman-logo img {
@@ -219,9 +223,36 @@ Menu section
 /* ===============================================================
 Shopping cart
 =================================================================*/
-/* .basket {
-  display: none;
-} */
+.basket {
+  padding: 1em;
+  background-color: var(--bg-color-cart);
+}
+
+.cart-item {
+  padding: 1em;
+  color: var(--text-color-dark); 
+  background-color: var(--bg-color-dish);
+  border-radius: 16px;
+}
+
+.price-box {
+  color: var(--text-color-light);
+}
+
+.price-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.separator {
+  height: 3px;
+  background-color: var(--bg-color-page);
+}
+
+.order-button {
+  background-color: var(--bg-color-banners);
+}
 
 /* ===============================================================
 Mobile navigation
@@ -300,8 +331,8 @@ Media Queries
     display: block;
     height: fit-content;
     min-width: 400px;
-    background-color: #363534;
-    color: #fdeadc;
+    background-color: var(--bg-color-cart);
+    color: var(--text-color-medium);
     border: orchid 3px solid;
   }
 }
