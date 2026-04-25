@@ -132,7 +132,24 @@ const dishes = [
   },
 ];
 
-const categories = ["Vorspeisen", "Hauptgerichte", "Nachspeisen", "Getränke"];
+const categories = [
+  {
+    name: "Vorspeisen",
+    imgPath: "../assets/img/icons/starter.png",
+  },
+  {
+    name: "Hauptgerichte",
+    imgPath: "../assets/img/icons/main-course.png",
+  },
+  {
+    name: "Nachspeisen",
+    imgPath: "../assets/img/icons/dessert.png",
+  },
+  {
+    name: "Getränke",
+    imgPath: "../assets/img/icons/drink.png",
+  },
+];
 
 const shoppingCart = [];
 

@@ -1,36 +1,41 @@
 function init() {
   renderMenu();
   renderCart();
+  if (shoppingCart.length > 0) {
+    renderPrices();
+  }
 }
 
 function renderMenu() {
   const menuOverview = document.getElementById("menu_overview");
-  menuOverview.innerHTML = "";
+  let html = "";
 
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
-    menuOverview.innerHTML += generateMenuTitlesHTML(category);
+
+    html += generateMenuTitlesHTML(category);
+    html += `<div class="dishes-wrapper">`;
 
     for (let j = 0; j < dishes.length; j++) {
       const dish = dishes[j];
 
-      if (dish.category === category) {
-        menuOverview.innerHTML += generatMenuListHTML(j, dish);
+      if (dish.category === category.name) {
+        html += generatMenuListHTML(j, dish);
       }
     }
+
+    html += `</div>`;
   }
+
+  menuOverview.innerHTML = html;
 }
 
 function addToCart(j) {
   const currentDish = dishes[j];
-
-  const existingDish = shoppingCart.find(function (dish) {
-    return dish.id === currentDish.id;
-  });
+  const existingDish = findItemInShoppingCart(currentDish);
 
   if (existingDish) {
     existingDish.amount++;
-    console.log("gericht erhöht: ", existingDish.name);
   } else {
     const newDish = {
       id: currentDish.id,
@@ -41,14 +46,27 @@ function addToCart(j) {
     shoppingCart.push(newDish);
   }
 
-
+  changeAddButton(currentDish);
   calculateTotal();
   renderCart();
+  renderPrices();
+}
+
+function changeAddButton(currentDish) {
+  const addButton = document.getElementById(
+    `add_to_cart_btn_${currentDish.id}`,
+  );
+
+  const existingDish = findItemInShoppingCart(currentDish);
+
+  if (existingDish) {
+    addButton.innerHTML = generateButtonContentHTML(existingDish);
+  }
 }
 
 function renderCart() {
   const innerBasket = document.getElementById("inner_basket");
-  innerBasket.innerHTML = "";
+  let html = "";
 
   if (shoppingCart.length === 0) {
     innerBasket.innerHTML = generateEmptyBasketHTML();
@@ -58,8 +76,11 @@ function renderCart() {
   for (let i = 0; i < shoppingCart.length; i++) {
     const item = shoppingCart[i];
 
-    innerBasket.innerHTML += generateShoppingCartHTML(i, item);
+    html += generateCartContentHTML(i, item);
   }
+
+  html += generatePriceContentHTML();
+  innerBasket.innerHTML = html;
 }
 
 function increaseAmount(i) {
@@ -71,6 +92,7 @@ function increaseAmount(i) {
 
   calculateTotal();
   renderCart();
+  renderPrices();
 }
 
 function decreaseAmount(i) {
@@ -85,6 +107,7 @@ function decreaseAmount(i) {
 
   calculateTotal();
   renderCart();
+  renderPrices();
 }
 
 function deleteDishes(i) {
@@ -92,6 +115,7 @@ function deleteDishes(i) {
 
   calculateTotal();
   renderCart();
+  renderPrices();
 }
 
 function calculateSubtotal() {
@@ -103,7 +127,6 @@ function calculateSubtotal() {
     const sum = itemPrice * itemAmount;
     subtotal += sum;
   }
-  console.log(`Zwischensumme:  ${subtotal.toFixed(2).replace(".", ",")} €`);
   return subtotal;
 }
 
@@ -112,16 +135,37 @@ function calculateTotal() {
   const subtotal = calculateSubtotal();
   if (shoppingCart.length > 0) {
     total = subtotal + deliveryFee;
-    console.log(`Endsumme: ${total.toFixed(2).replace(".", ",")} €`);
   } else {
     total = subtotal;
-    console.log(`Endsumme: ${subtotal.toFixed(2).replace(".", ",")} €`);
   }
-  // renderPrices(subtotal, total); 
+
+  return total;
 }
 
-// function renderPrices(subtotal, total) {
-//   const subtotalBox = document.getElementById(``)
-// }
+function renderPrices() {
+  const subtotalBox = document.getElementById("subtotal_box");
+  const totalBox = document.getElementById("total_box");
+  const buyNowBtn = document.getElementById("buy_now_btn");
+  subtotalBox.innerHTML = "";
+  totalBox.innerHTML = "";
+  buyNowBtn.innerHTML = "";
+
+  const subtotal = calculateSubtotal();
+  const total = calculateTotal();
+
+  subtotalBox.innerHTML = `${subtotal.toFixed(2).replace(".", ",")}€`;
+  totalBox.innerHTML = `${total.toFixed(2).replace(".", ",")}€`;
+  buyNowBtn.innerHTML = `Buy now (${total.toFixed(2).replace(".", ",")}€)`;
+}
+
+function showCart() {
+  const cartContainer = document.getElementById("basket");
+  cartContainer.classList.add("show");
+}
+
+function closeCart() {
+  const cartContainer = document.getElementById("basket");
+  cartContainer.classList.remove("show");
+}
 
 init();

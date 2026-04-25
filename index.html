@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bestell-App</title>
+    <title>Menü - Bestell-App</title>
     <link rel="icon" href="./assets/img/icons/RomanIndonesienRestaurant.png" />
     <link rel="stylesheet" href="./css/reset_stylesheet.css" />
     <link rel="stylesheet" href="./css/fonts.css" />
@@ -11,17 +11,24 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./javascript/data.js" defer></script>
     <script src="./javascript/templates.js" defer></script>
+    <script src="./javascript/auxiliaries.js"></script>
     <script src="./javascript/script.js" defer></script>
   </head>
   <body>
     <header id="top">
       <div class="header-logo-wrapper">
+        <a href="./index.html">
+          <img
+            class="header-logo"
+            src="./assets/img/icons/Logo_02.png"
+            alt="Restaurant-Logo"
+          />
+        </a>
         <img
-          class="header-logo"
-          src="./assets/img/icons/Logo_02.png"
-          alt="Restaurant-Logo"
+          class="fake-burger-menu"
+          src="./assets/img/icons/dehaze.svg"
+          alt=""
         />
-        <img class="fake-burger-menu" src="./assets/img/icons/dehaze.svg" alt="" />
       </div>
     </header>
 
@@ -166,9 +173,13 @@
       </section>
       <section class="menu-wrapper">
         <section id="menu_overview" class="menu-overview"></section>
-        <section class="basket">
+        <section id="basket" class="basket">
+          <button class="close-btn" onclick="closeCart()">
+            <img class="close-icon" src="../assets/img/icons/close.png" alt="" />
+          </button>
           <h2 class="cart-heading">Your Basket</h2>
-          <div id="inner_basket"></div>
+          <div id="inner_basket" class="inner-basket"></div>
+          <div id="price_wrapper"></div>
         </section>
       </section>
 
@@ -176,16 +187,22 @@
         <nav>
           <ul class="nav-menu">
             <li>
-              <a href="#top"><img src="./assets/img/icons/home.svg" alt="" /></a>
+              <a href="#top"
+                ><img src="./assets/img/icons/home.svg" alt=""
+              /></a>
             </li>
             <li>
-              <a href="#"><img src="./assets/img/icons/profile.svg" alt="" /></a>
+              <a href="#"
+                ><img src="./assets/img/icons/profile.svg" alt=""
+              /></a>
             </li>
             <li>
               <a href="#"><img src="./assets/img/icons/orders.svg" alt="" /></a>
             </li>
             <li>
-              <a href="#"><img src="./assets/img/icons/basket.svg" alt="" /></a>
+              <button class="cart-btn" onclick="showCart()">
+                <img src="./assets/img/icons/basket.svg" alt="" />
+              </button>
             </li>
           </ul>
         </nav>
@@ -194,9 +211,9 @@
 
     <footer>
       <div class="inner-footer">
-        <a class="footer-link" href="">Imprint</a>
-        <a class="footer-link" href="">Cookie Preferences</a>
-        <a class="footer-link" href="">&copy;2026 Restaurant Roman</a>
+        <a class="footer-link" href="./html/imprint.html">Imprint</a>
+        <button class="footer-link" href="#">Cookie Preferences</button>
+        <p class="footer-link">&copy;2026 Restaurant Roman</p>
       </div>
     </footer>
   </body>
