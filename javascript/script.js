@@ -4,6 +4,7 @@ function init() {
   if (shoppingCart.length > 0) {
     renderPrices();
   }
+  updateBadge();
 }
 
 function renderMenu() {
@@ -50,6 +51,7 @@ function addToCart(j) {
   calculateTotal();
   renderCart();
   renderPrices();
+  updateBadge();
 }
 
 function changeAddButton(currentDish) {
@@ -64,12 +66,42 @@ function changeAddButton(currentDish) {
   }
 }
 
+function resetAddButtons() {
+  const addButtons = document.querySelectorAll(".add-to-cart-btn");
+
+  for (let i = 0; i < addButtons.length; i++) {
+    const addButton = addButtons[i];
+    addButton.innerHTML = "Add to cart";
+  }
+}
+
+function updateBadge() {
+  const badgeContainer = document.getElementById("badge");
+  let sumOfDishes = 0;
+
+  if (shoppingCart.length === 0) {
+    badgeContainer.classList.add("d-none");
+    return;
+  }
+
+  for (let i = 0; i < shoppingCart.length; i++) {
+    const dishAmount = shoppingCart[i].amount;
+    sumOfDishes += dishAmount;
+  }
+
+  badgeContainer.classList.remove("d-none");
+  // badgeContainer.innerHTML = "";
+  badgeContainer.innerHTML = `${sumOfDishes}`;
+}
+
 function renderCart() {
   const innerBasket = document.getElementById("inner_basket");
+  const priceWrapper = document.getElementById("price_wrapper");
   let html = "";
 
   if (shoppingCart.length === 0) {
     innerBasket.innerHTML = generateEmptyBasketHTML();
+    priceWrapper.innerHTML = "";
     return;
   }
 
@@ -79,8 +111,8 @@ function renderCart() {
     html += generateCartContentHTML(i, item);
   }
 
-  html += generatePriceContentHTML();
   innerBasket.innerHTML = html;
+  priceWrapper.innerHTML = generatePriceContentHTML();
 }
 
 function increaseAmount(i) {
@@ -93,6 +125,7 @@ function increaseAmount(i) {
   calculateTotal();
   renderCart();
   renderPrices();
+  updateBadge();
 }
 
 function decreaseAmount(i) {
@@ -108,6 +141,7 @@ function decreaseAmount(i) {
   calculateTotal();
   renderCart();
   renderPrices();
+  updateBadge();
 }
 
 function deleteDishes(i) {
@@ -163,9 +197,22 @@ function showCart() {
   cartContainer.classList.add("show");
 }
 
-function closeCart() {
-  const cartContainer = document.getElementById("basket");
-  cartContainer.classList.remove("show");
+function orderFood() {
+  shoppingCart.length = 0;
+  renderCart();
+  closeContainer("basket");
+  resetAddButtons();
+  updateBadge();
+  showSuccessMessage();
+}
+
+function showSuccessMessage() {
+  const messageContainer = document.getElementById("success");
+  messageContainer.classList.add("show");
+
+  setTimeout(() => {
+    messageContainer.classList.remove("show");
+  }, 3000);
 }
 
 init();

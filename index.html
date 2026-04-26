@@ -174,8 +174,12 @@
       <section class="menu-wrapper">
         <section id="menu_overview" class="menu-overview"></section>
         <section id="basket" class="basket">
-          <button class="close-btn" onclick="closeCart()">
-            <img class="close-icon" src="../assets/img/icons/close.png" alt="" />
+          <button class="close-btn" onclick="closeContainer('basket')">
+            <img
+              class="close-icon"
+              src="../assets/img/icons/close.png"
+              alt=""
+            />
           </button>
           <h2 class="cart-heading">Your Basket</h2>
           <div id="inner_basket" class="inner-basket"></div>
@@ -202,11 +206,23 @@
             <li>
               <button class="cart-btn" onclick="showCart()">
                 <img src="./assets/img/icons/basket.svg" alt="" />
+                <span id="badge" class="badge"></span>
               </button>
             </li>
           </ul>
         </nav>
       </aside>
+
+      <section id="success" class="success">
+        <article class="success-message">
+          <button class="close-btn" onclick="closeContainer('success')">
+            <img class="close-icon" src="./assets/img/icons/close.png" alt="" />
+          </button>
+          <img src="./assets/img/icons/car_icon.png" alt="">
+          <p class="confirmation">Order confirmed!</p>
+          <p class="info">Your food is on the way!</p>
+        </article>
+      </section>
     </main>
 
     <footer>

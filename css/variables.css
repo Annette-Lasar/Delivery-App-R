@@ -7,6 +7,7 @@ Colors
 
   --black-1000: #000000;
   --gray-50: #0000001a; 
+  --gray-500: #45444466; 
   --gray-800: #444341;
   --gray-900: #363534;
 
@@ -14,6 +15,7 @@ Colors
 
   --orange-50: #fdf0e7;
   --orange-100: #fdeadc;
+  --orange-200: #e7c3ad;
 
 
   --text-color-light: var(--white-100); 
@@ -22,6 +24,7 @@ Colors
   --text-color-dark: var(--gray-900);
 
   --bg-color-page: var(--white-100);
+  --bg-color-page-medium: var(--gray-500);
   --bg-color-btn: var(--white-100);
   --bg-color-btn-dark: var(--white-100);
   --bg-color-banners: var(--orange-600); 
@@ -29,6 +32,12 @@ Colors
   --bg-color-cart: var(--gray-900);
   --bg-color-light: var(--orange-50);
   --bg-color-dish: var(--orange-100); 
+  --bg-color-badge: var(--orange-100); 
+  --bg-color-message: var(--gray-900); 
+
+
+  --scrollbar-track: var(--gray-900); 
+  --scrollbar-thumb: var(--orange-200); 
 
   --box-shadow: var(--gray-50); 
   --border-color-light: var(--white-100); 

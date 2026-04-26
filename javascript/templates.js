@@ -57,7 +57,7 @@ function generatePriceContentHTML() {
           <p class="price-line"><span>Delivery fee</span><span>${deliveryFee.toFixed(2).replace(".", ",")}€</span></p>
           <div class="separator"></div>
           <p class="price-line"><span>Total</span><span id="total_box"></span></p>
-          <button class="order-button" ><span id="buy_now_btn"></span></button>
+          <button id="buy_now_btn" class="buy-now-btn" onclick="orderFood()"></button>
         </article>
   `;
 }
