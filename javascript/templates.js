@@ -9,7 +9,7 @@ function generateMenuTitlesHTML(category) {
     `;
 }
 
-function generatMenuListHTML(j, dish) {
+function generatMenuListHTML(dish) {
   return /*html*/ `
   <article class="dishes">
     <div class="dish-img-wrapper">
@@ -19,7 +19,7 @@ function generatMenuListHTML(j, dish) {
       <h3 class="dish-title">${dish.name}</h3>
       <p class="dish-price">${dish.price.toFixed(2).replace(".", ",")}€</p>
       <p class="dish-description">${dish.description}</p>
-      <button id="add_to_cart_btn_${dish.id}" class="add-to-cart-btn" onclick="addToCart(${j})">Add to basket</button>
+      <button id="add_to_cart_btn_${dish.id}" class="add-to-cart-btn" onclick="addToCart(${dish.id})">Add to basket</button>
     </div>
   </article>
   `;
@@ -31,24 +31,37 @@ function generateButtonContentHTML(dish) {
   `;
 }
 
-function generateCartContentHTML(i, item) {
+function generateCartContentHTML(item) {
   return /* html */ `  
   <article class="cart-item">
     <div class="cart-item-title-wrapper">
-      <p class="cart-item-text">${item.amount} <span>x</span></p>
-      <p class="cart-item-text">${item.name}</p>
-    </div>
-      <div class="button-wrapper">
-       <button class="delete-dishes" onclick="deleteDishes(${i})">
-        <img src="../assets/img/icons/delete_icon.png" alt="">
-       </button>
-       <button class="cart-item-text decrease-dishes" onclick="decreaseAmount(${i})">-1</button>
-       <button class="cart-item-text increase-dishes" onclick="increaseAmount(${i})">1+</button>
+      <div class="cart-item-title">
+        <p class="cart-item-text">${item.amount} <span>x</span></p>
+        <p class="cart-item-text">${item.name}</p>
       </div>
-       <p class="cart-item-text item-price">${item.price.toFixed(2).replace(".", ",")} €</p>
+      <span id="optional_trash_btn_${item.id}" class="optional-trash-btn"></span>
+    </div>
+      <div id="delete_or_minus_${item.id}" class="delete-or-minus"></div>
+      <button class="cart-item-text increase-dishes" onclick="increaseAmount(${item.id})">1+</button>
+      <p class="cart-item-text item-price">${item.price.toFixed(2).replace(".", ",")} €</p>
   </article>
     `;
 }
+
+function generateTrashButtonHTML(id) {
+  return /* html */ `
+    <button class="delete-dishes" onclick="deleteDishesOfSameKind(${id})">
+      <img src="../assets/img/icons/delete_icon.png" alt="">
+    </button>
+  `;
+}
+
+function generateDecreaseButtonHTML(id) {
+  return /* html */ `
+    <button class="cart-item-text decrease-dishes" onclick="decreaseAmount(${id})">-1</button>
+  `;
+}
+
 
 function generatePriceContentHTML() {
   return /* html */ `

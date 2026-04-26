@@ -11,13 +11,13 @@ Colors
   --gray-800: #444341;
   --gray-900: #363534;
 
-  --orange-600: #e76c1f;
-
   --orange-50: #fdf0e7;
   --orange-100: #fdeadc;
   --orange-200: #e7c3ad;
+  --orange-600: #e76c1f;
 
 
+  /* semantic colors */
   --text-color-light: var(--white-100); 
   --text-color-medium: var(--orange-100);
   --text-color-medium-dark: var(--orange-600);

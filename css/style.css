@@ -386,49 +386,74 @@ Shopping cart
   padding: 1em;
   margin: 0 auto 0.5em;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-template-areas:
-    "title title"
-    "button price";
-  gap: 0.5em;
+    "title title title title title title title title"
+    "del-or-min increase . . price price price price";
+  row-gap: 0.5em;
   color: var(--text-color-dark);
   background-color: var(--bg-color-dish);
   border-radius: 16px;
 }
 
 .cart-item-title-wrapper {
+  width: 100%;
   grid-area: title;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5em;
+  border: orchid 3px solid;
+}
+
+.cart-item-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
 }
 
 .cart-item-text {
   font-weight: 700;
 }
 
-.button-wrapper {
-  grid-area: button;
-  display: flex;
-  align-items: center;
-}
-
 .increase-dishes,
 .decrease-dishes,
 .delete-dishes {
+  width: fit-content;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
+.increase-dishes {
+  padding: 0;
+  grid-area: increase;
+  border: red 1px solid;
+}
+
+.delete-or-minus {
+  width: fit-content;
+  padding: 0;
+  grid-area: del-or-min;
+  border: blue 1px solid;
+}
+
 .delete-dishes {
   height: 24px;
+  width: 24px;
   padding: 0;
   margin: 0;
 }
 
 .delete-dishes img {
   height: 100%;
+}
+
+.optional-trash-btn {
+  grid-area: trash;
+  justify-self: flex-end;
+  border: green 1px solid;
 }
 
 .item-price {
