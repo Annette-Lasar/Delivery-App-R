@@ -1,0 +1,204 @@
+/* ===============================================================
+Header
+=================================================================*/
+header {
+  height: var(--header-height);
+  grid-area: header;
+  background-color: var(--bg-color-banners);
+}
+
+.header-logo-wrapper {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1em 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: block;
+  width: 92px;
+  height: 38px;
+}
+
+.fake-burger-menu {
+  display: none;
+}
+
+/* ===============================================================
+Main
+=================================================================*/
+main {
+  grid-area: main;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto; 
+}
+
+/* ===============================================================
+Hero section
+=================================================================*/
+.hero-img-wrapper {
+  margin: 1em auto 0;
+  height: clamp(100px, 35vh, 400px);
+  /* aspect-ratio: 1 / 1; */
+  position: relative;
+  max-width: 95%;
+  background-image: url("../assets/img/IndonesischesEssen.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+}
+
+.roman-logo {
+  width: 150px;
+  height: 150px;
+  background-color: var(--bg-color-light);
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: -75px;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  border: 4px solid var(--border-color-light);
+  box-shadow: 0 4px 10px var(--box-shadow);
+}
+
+.roman-logo img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.small-info {
+  height: 100%;
+  padding: 5em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.star-wrapper {
+  margin: 0 0 1em;
+  padding: 0 0 0.5em;
+  text-align: center;
+}
+
+.star {
+  height: 28px;
+}
+
+.star.transparent {
+  height: 26px;
+}
+
+.slogan {
+  text-align: center;
+}
+
+/* ===============================================================
+Footer
+=================================================================*/
+footer {
+  padding: 0 0 80px;
+  grid-area: footer;
+  background-color: var(--orange-600);
+}
+
+.inner-footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+
+.footer-link {
+  margin: 0 0 0.5em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: var(--white-100);
+}
+
+/* ===============================================================
+Mobile navigation
+=================================================================*/
+aside {
+  height: var(--mobile-navbar-height);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-color-mobile-nav);
+}
+
+nav {
+  height: 100%;
+}
+
+.nav-menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav-menu li {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu li a,
+.cart-btn {
+  height: 60px;
+  width: 60px;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--gray-800);
+}
+
+.cart-btn {
+  position: relative;
+  border: none;
+  cursor: pointer;
+}
+
+.badge {
+  width: 20px;
+  height: 20px;
+  padding: 0.2em;
+  position: absolute;
+  top: -2px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-medium-dark);
+  border-radius: 100%;
+  background-color: var(--bg-color-badge);
+}
+
+/* ===============================================================
+Media Queries
+=================================================================*/
+@media (min-width: 50em) {
+  .fake-burger-menu {
+    display: none;
+  }
+
+  aside {
+    display: none;
+  }
+}

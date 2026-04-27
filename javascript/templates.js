@@ -2,7 +2,7 @@ function generateMenuTitlesHTML(category) {
   return /*html*/ `
   <div class="title-wrapper">
     <img class="title-img" src="${category.imgPath}" alt=""> 
-    <h2>
+    <h2 class="title-banner">
       ${category.name}
     </h2>
   </div>

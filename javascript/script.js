@@ -7,6 +7,10 @@ function init() {
   updateBadge();
 }
 
+/* ==========================================================
+Menu
+============================================================= */
+
 function renderMenu() {
   const menuOverview = document.getElementById("menu_overview");
   let newDish = null;
@@ -32,21 +36,44 @@ function renderMenu() {
   menuOverview.innerHTML = html;
 }
 
-function addToCart(id) {
-  console.log("addToCart called with id:", id);
-  console.trace();
+/* ==========================================================
+Shopping cart
+============================================================= */
 
+function renderCart() {
+  const innerBasket = document.getElementById("inner_basket");
+  const priceWrapper = document.getElementById("price_wrapper");
+
+  let html = "";
+
+  if (shoppingCart.length === 0) {
+    innerBasket.innerHTML = generateEmptyBasketHTML();
+    priceWrapper.innerHTML = "";
+    return;
+  }
+
+  for (let i = 0; i < shoppingCart.length; i++) {
+    const item = shoppingCart[i];
+
+    html += generateCartContentHTML(item);
+  }
+
+  innerBasket.innerHTML = html;
+  priceWrapper.innerHTML = generatePriceContentHTML();
+}
+
+/* =============================================================
+Increase, decrease and delete items in shopping cart
+=============================================================== */
+function addToCart(id) {
   const currentDish = dishes.find((d) => d.id === id);
   const existingDish = findItemInShoppingCart(id);
-
-  console.log("vorher: ", JSON.stringify(shoppingCart));
 
   if (existingDish) {
     existingDish.amount++;
   } else {
     const newDish = createNewDish(currentDish);
     shoppingCart.push(newDish);
-    console.log("nachher: ", JSON.stringify(shoppingCart));
   }
 
   updateAddButton(currentDish.id);
@@ -56,11 +83,61 @@ function addToCart(id) {
   updateBadge();
 }
 
+function increaseAmount(id) {
+  const currentItem = shoppingCart.find((item) => item.id === id);
+
+  if (!currentItem) return;
+
+  currentItem.amount++;
+
+  renderCart();
+  renderPrices();
+  adaptButtonsOnBasketDishCard(currentItem.id);
+  updateBadge();
+}
+
+function decreaseAmount(id) {
+  const currentItem = shoppingCart.find((item) => item.id === id);
+
+  if (!currentItem) return;
+
+  if (currentItem.amount > 1) {
+    currentItem.amount--;
+  } else if (currentItem.amount <= 1) {
+    deleteDishesOfSameKind(currentItem.id);
+  }
+
+  renderCart();
+  renderPrices();
+  adaptButtonsOnBasketDishCard(currentItem.id);
+  updateBadge();
+}
+
+function deleteDishesOfSameKind(id) {
+  const index = shoppingCart.findIndex((item) => item.id === id);
+
+  if (index === -1) return;
+
+  shoppingCart.splice(index, 1);
+
+  renderCart();
+  renderPrices();
+  updateBadge();
+  resetAddButton(id);
+
+  if (shoppingCart.length === 0) {
+    closeContainer("basket");
+  }
+}
+
+/* ====================================================
+Update UI buttons and badges
+======================================================= */
+
 function updateAddButton(id) {
   const addButton = document.getElementById(`add_to_cart_btn_${id}`);
 
   const existingDish = findItemInShoppingCart(id);
-  // console.log(existingDish);
 
   if (existingDish) {
     addButton.innerHTML = generateButtonContentHTML(existingDish);
@@ -68,22 +145,21 @@ function updateAddButton(id) {
 }
 
 function resetAddButton(id) {
-  const currentDish = dishes.find((dish) => dish.id === id);
   const currentAddButton = document.getElementById(`add_to_cart_btn_${id}`);
 
-  if (currentDish.amount === 0) {
+  if (!findItemInShoppingCart(id)) {
     currentAddButton.innerHTML = "Add to basket";
   }
 }
 
-// function resetAllAddButtons() {
-//   const addButtons = document.querySelectorAll(".add-to-cart-btn");
+function resetAllAddButtons() {
+  const addButtons = document.querySelectorAll(".add-to-cart-btn");
 
-//   for (let i = 0; i < addButtons.length; i++) {
-//     const addButton = addButtons[i];
-//     addButton.innerHTML = "Add to cart";
-//   }
-// }
+  for (let i = 0; i < addButtons.length; i++) {
+    const addButton = addButtons[i];
+    addButton.innerHTML = "Add to cart";
+  }
+}
 
 function updateBadge() {
   const badgeContainer = document.getElementById("badge");
@@ -109,8 +185,9 @@ function adaptButtonsOnBasketDishCard(id) {
     `delete_or_minus_${id}`,
   );
   const optionalTrash = document.getElementById(`optional_trash_btn_${id}`);
-
   clearContainers(optionalTrash, deleteOrMinusContainer);
+
+  if (!item) return; 
 
   if (item.amount === 1) {
     deleteOrMinusContainer.innerHTML = generateTrashButtonHTML(id);
@@ -120,71 +197,9 @@ function adaptButtonsOnBasketDishCard(id) {
   }
 }
 
-function renderCart() {
-  const innerBasket = document.getElementById("inner_basket");
-  const priceWrapper = document.getElementById("price_wrapper");
-
-  let html = "";
-
-  if (shoppingCart.length === 0) {
-    innerBasket.innerHTML = generateEmptyBasketHTML();
-    priceWrapper.innerHTML = "";
-    return;
-  }
-
-  for (let i = 0; i < shoppingCart.length; i++) {
-    const item = shoppingCart[i];
-
-    html += generateCartContentHTML(item);
-  }
-
-  innerBasket.innerHTML = html;
-  priceWrapper.innerHTML = generatePriceContentHTML();
-}
-
-function increaseAmount(id) {
-  const currentItem = shoppingCart.find((item) => item.id === id);
-  currentItem.amount++;
-
-  renderCart();
-  renderPrices();
-  adaptButtonsOnBasketDishCard(currentItem.id);
-  updateBadge();
-}
-
-function decreaseAmount(id) {
-  const currentItem = shoppingCart.find((item) => item.id === id);
-
-  if (currentItem.amount > 1) {
-    currentItem.amount--;
-  } else if (currentItem.amount <= 1) {
-    deleteDishesOfSameKind(currentItem.id);
-  }
-
-  calculateTotal();
-  renderCart();
-  renderPrices();
-  adaptButtonsOnBasketDishCard(currentItem.id);
-  updateBadge();
-}
-
-function deleteDishesOfSameKind(id) {
-  const currentItem = shoppingCart.find((item) => item.id === id);
-  const index = shoppingCart.findIndex((item) => item.id === id);
-
-  if (index === -1) return;
-
-  shoppingCart.splice(index, 1);
-
-  renderCart();
-  renderPrices();
-  adaptButtonsOnBasketDishCard(currentItem.id);
-  updateBadge();
-  if (shoppingCart.length === 0) {
-    closeContainer("basket");
-  }
-}
-
+/* =====================================================
+Prices & Ordering
+======================================================*/
 function calculateSubtotal() {
   let subtotal = 0;
   for (let i = 0; i < shoppingCart.length; i++) {
@@ -210,6 +225,8 @@ function calculateTotal() {
 }
 
 function renderPrices() {
+  if (shoppingCart.length === 0) return;
+
   const subtotalBox = document.getElementById("subtotal_box");
   const totalBox = document.getElementById("total_box");
   const buyNowBtn = document.getElementById("buy_now_btn");
@@ -223,22 +240,22 @@ function renderPrices() {
   buyNowBtn.innerHTML = `Buy now (${total.toFixed(2).replace(".", ",")}€)`;
 }
 
-// function orderFood() {
-//   emptyShoppingCart();
-//   renderCart();
-//   closeContainer("basket");
-//   resetAllAddButtons();
-//   updateBadge();
-//   showSuccessMessage();
-// }
+function orderFood() {
+  emptyShoppingCart();
+  renderCart();
+  closeContainer("basket");
+  resetAllAddButtons();
+  updateBadge();
+  showSuccessMessage();
+}
 
-// function showSuccessMessage() {
-//   const messageContainer = document.getElementById("success");
-//   messageContainer.classList.add("show");
+function showSuccessMessage() {
+  const messageContainer = document.getElementById("success");
+  messageContainer.classList.add("show");
 
-//   setTimeout(() => {
-//     messageContainer.classList.remove("show");
-//   }, 3000);
-// }
+  setTimeout(() => {
+    messageContainer.classList.remove("show");
+  }, 3000);
+}
 
 init();

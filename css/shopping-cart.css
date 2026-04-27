@@ -1,0 +1,219 @@
+/* ===============================================================
+Shopping cart
+=================================================================*/
+.basket {
+  width: 90%;
+  max-width: 300px;
+  height: 80%;
+  max-height: 600px;
+  padding: 1em;
+  position: fixed;
+  left: 50%;
+  bottom: var(--mobile-navbar-height);
+  transform: translate(-50%, 100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-color-cart);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.basket.show {
+  bottom: var(--mobile-navbar-height);
+  transform: translate(-50%, 0);
+}
+
+.close-btn {
+  height: 36px;
+  border: none;
+  align-self: flex-end;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.close-icon {
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(82%) sepia(1%) saturate(2006%)
+    hue-rotate(320deg) brightness(113%) contrast(105%);
+}
+
+.inner-basket {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--text-color-medium);
+  overflow-y: auto;
+}
+
+.inner-basket::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cart-content-wrapper {
+  padding: 1em 0;
+}
+
+.cart-content-wrapper p {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.cart-icon {
+  margin: 2.5em 0 0;
+  height: 90px;
+}
+
+.dish-card-wrapper {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  width: 95%;
+  padding: 1em;
+  margin: 0 auto 0.5em;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-areas:
+    "title title title title title title title title"
+    "del-or-min increase . . price price price price";
+  row-gap: 0.5em;
+  color: var(--text-color-dark);
+  background-color: var(--bg-color-dish);
+  border-radius: 16px;
+}
+
+.cart-item-title-wrapper {
+  width: 100%;
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+.cart-item-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.cart-item-text {
+  font-weight: 700;
+}
+
+.increase-dishes,
+.decrease-dishes,
+.delete-dishes {
+  width: fit-content;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.increase-dishes {
+  padding: 0;
+  grid-area: increase;
+}
+
+.delete-or-minus {
+  width: fit-content;
+  padding: 0;
+  grid-area: del-or-min;
+}
+
+.delete-dishes {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+.delete-dishes img {
+  height: 100%;
+}
+
+.optional-trash-btn {
+  grid-area: trash;
+  justify-self: flex-end;
+}
+
+.item-price {
+  grid-area: price;
+  justify-self: flex-end;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  gap: 0.3em;
+  color: var(--text-color-light);
+}
+
+.price-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.separator {
+  height: 2px;
+  background-color: var(--bg-color-page);
+}
+
+.buy-now-btn {
+  margin: 1em 0 0;
+  padding: 0.5em 1em;
+  font-size: 1.3rem;
+  color: var(--text-color-light);
+  border-radius: 60px;
+  background-color: var(--bg-color-banners);
+  cursor: pointer;
+}
+
+/* ===============================================================
+Media Queries
+=================================================================*/
+@media (min-width: 50em) {
+  .basket {
+    grid-column: 2;
+    min-height: 500px;
+    min-width: 400px;
+    position: sticky;
+    top: 20px;
+    z-index: 2;
+    transform: unset;
+    align-self: flex-start;
+  }
+
+  .close-btn {
+    display: none;
+  }
+
+  .price-wrapper {
+    width: 95%;
+  }
+
+  .price-line {
+    font-size: 1.2rem;
+  }
+
+  .price-line:last-of-type {
+    margin: 0 0 1em;
+  }
+
+  .buy-now-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}
