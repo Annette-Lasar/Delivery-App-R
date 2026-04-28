@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="./css/reset_stylesheet.css" />
     <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/variables.css" />
-    <link rel="stylesheet" href="./css/shopping-cart.css">
+    <link rel="stylesheet" href="./css/shopping-cart.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/layout.css">
-    <link rel="stylesheet" href="./css/food-menu.css">
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/food-menu.css" />
     <script src="./javascript/data.js" defer></script>
     <script src="./javascript/templates.js" defer></script>
     <script src="./javascript/auxiliaries.js"></script>
@@ -222,18 +222,38 @@
           <button class="close-btn" onclick="closeContainer('success')">
             <img class="close-icon" src="./assets/img/icons/close.png" alt="" />
           </button>
-          <img src="./assets/img/icons/car_icon.png" alt="">
+          <img src="./assets/img/icons/car_icon.png" alt="" />
           <p class="confirmation">Order confirmed!</p>
           <p class="info">Your food is on the way!</p>
         </article>
       </section>
     </main>
 
+    <section id="cookie_banner" class="cookie-banner">
+      <button class="close-button" onclick="closeContainer('cookie_banner')">
+        <img class="close-icon" src="./assets/img/icons/close.png" alt="" />
+      </button>
+      <img class="cookie" src="./assets/img/icons/cookie.png" alt="" />
+      
+        <h2 class="cookie-title">We use Cookies</h2>
+        <p class="cookie-text">
+          This website is a demo project created for practice purposes. It does
+          not use or store any cookies. <br />
+          This banner is shown for visual demonstration only. The buttons have
+          no effect.
+        </p>
+        <button class="accept">Accept</button>
+        <button class="reject">Reject</button>
+      
+    </section>
+
     <footer>
       <div class="inner-footer">
         <a class="footer-link" href="./html/imprint.html">Imprint</a>
-        <button class="footer-link" href="#">Cookie Preferences</button>
-        <p class="footer-link">&copy;2026 Restaurant Roman</p>
+        <button class="cookie-btn" onclick="showContainer('cookie_banner')">
+          Cookie Preferences
+        </button>
+        <p class="footer-info">&copy;2026 Restaurant Roman</p>
       </div>
     </footer>
   </body>

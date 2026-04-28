@@ -34,7 +34,7 @@ main {
   grid-area: main;
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 /* ===============================================================
@@ -118,12 +118,23 @@ footer {
   padding: 1em 0;
 }
 
-.footer-link {
+.footer-link,
+.footer-info,
+.cookie-btn {
   margin: 0 0 0.5em;
   display: block;
+  font-size: 1rem;
   text-align: center;
   text-decoration: none;
   color: var(--white-100);
+}
+
+.cookie-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: var(--bg-color-banners);
+  border: none;
+  cursor: pointer;
 }
 
 /* ===============================================================
@@ -135,6 +146,7 @@ aside {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 20;
   background-color: var(--bg-color-mobile-nav);
 }
 
@@ -191,14 +203,128 @@ nav {
 }
 
 /* ===============================================================
+Cookie-banner
+=================================================================*/
+
+.cookie-banner {
+  width: 95%;
+  max-width: 310px;
+  padding: 1.5em;
+  position: fixed;
+  left: 50%;
+  bottom: -100%;
+  transform: translateX(-50%); 
+  transition: bottom 0.3s ease;
+  z-index: 15;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "close"
+    "cookie"
+    "title"
+    "text"
+    "accept"
+    "reject";
+  gap: 12px;
+  background-color: var(--bg-color-cookie-banner);
+  border-radius: 30px;
+  place-items: center;
+}
+
+.cookie-banner.show {
+  bottom: calc(var(--mobile-navbar-height) + 12px); 
+  
+}
+
+.cookie {
+  grid-area: cookie;
+}
+
+.close-button {
+  grid-area: close;
+  padding: 0;
+  height: 36px;
+  border: none;
+  justify-self: flex-end;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.close-icon {
+  justify-self: flex-end;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(82%) sepia(1%) saturate(2006%)
+    hue-rotate(320deg) brightness(113%) contrast(105%);
+}
+
+.cookie-title {
+  grid-area: title;
+  padding-inline: 0;
+  font-size: 32px;
+  background-color: unset;
+  text-align: left;
+}
+
+.cookie-text {
+  margin: 0 0 1em;
+  grid-area: text;
+  color: var(--text-color-medium);
+}
+
+.accept,
+.reject {
+  padding: 0.5em 1.5em;
+  background-color: var(--bg-color-banners);
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50px;
+  color: var(--text-color-light);
+}
+
+.accept {
+  grid-area: accept;
+}
+
+.reject {
+  grid-area: reject;
+  background-color: transparent;
+  border: 2px solid var(--bg-color-dish);
+}
+
+/* ===============================================================
 Media Queries
 =================================================================*/
 @media (min-width: 50em) {
   .fake-burger-menu {
-    display: none;
+    display: block;
   }
 
   aside {
     display: none;
   }
+
+  footer {
+    padding: 0;
+  }
+
+  .cookie-banner {
+    max-width: 600px;
+    padding: 1.5em;
+    background-color: var(--bg-color-cookie-banner);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "cookie close close close"
+      "cookie title title title"
+      "cookie text text text"
+      "cookie accept . reject";
+    column-gap: 12px;
+    border-radius: 30px;
+  }
+
+  .cookie {
+    align-self: center;
+  }
 }
+
+
