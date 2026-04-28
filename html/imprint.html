@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="../css/reset_stylesheet.css" />
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/layout.css" />
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../javascript/auxiliaries.js"></script>
   </head>
   <body>
     <header id="top">
@@ -35,9 +36,9 @@
       <address class="paragraph">
         <strong>Verantwortlich für den Inhalt dieser Website:</strong> <br />
         Roman Buchmüller<br />
-        [Straße und Hausnummer]<br />
-        [PLZ Ort]<br />
-        [Österreich]
+        Bachsiedlung 344/8<br />
+        2116 Niederleis<br />
+        Österreich
       </address>
 
       <h2>Kontakt</h2>
@@ -74,10 +75,29 @@
         >
       </p>
     </main>
+    <section id="cookie_banner" class="cookie-banner">
+      <button class="close-button" onclick="closeContainer('cookie_banner')">
+        <img class="close-icon" src="../assets/img/icons/close.png" alt="" />
+      </button>
+      <img class="cookie" src="../assets/img/icons/cookie.png" alt="" />
+
+      <h2 class="cookie-title">We use Cookies</h2>
+      <p class="cookie-text">
+        This website is a demo project created for practice purposes. It does
+        not use or store any cookies. <br />
+        This banner is shown for visual demonstration only. The buttons have no
+        effect.
+      </p>
+      <button class="accept">Accept</button>
+      <button class="reject">Reject</button>
+    </section>
+
     <footer>
       <div class="inner-footer">
         <a class="footer-link" href="../index.html">Home</a>
-        <button class="footer-link" href="">Cookie Preferences</button>
+        <button class="cookie-btn" onclick="showContainer('cookie_banner')">
+          Cookie Preferences
+        </button>
         <p class="footer-link" href="">&copy;2026 Restaurant Roman</p>
       </div>
     </footer>
