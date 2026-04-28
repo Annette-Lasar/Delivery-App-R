@@ -60,6 +60,8 @@ function renderCart() {
 
   innerBasket.innerHTML = html;
   priceWrapper.innerHTML = generatePriceContentHTML();
+
+  updateButtonsOnDishCardsInCart(); 
 }
 
 /* =============================================================
@@ -78,7 +80,7 @@ function addToCart(id) {
 
   updateAddButton(currentDish.id);
   renderCart();
-  adaptButtonsOnBasketDishCard(currentDish.id);
+  // adaptButtonsOnBasketDishCard(currentDish.id);
   renderPrices();
   updateBadge();
 }
@@ -92,7 +94,7 @@ function increaseAmount(id) {
 
   renderCart();
   renderPrices();
-  adaptButtonsOnBasketDishCard(currentItem.id);
+  // adaptButtonsOnBasketDishCard(currentItem.id);
   updateBadge();
 }
 
@@ -109,7 +111,7 @@ function decreaseAmount(id) {
 
   renderCart();
   renderPrices();
-  adaptButtonsOnBasketDishCard(currentItem.id);
+  // adaptButtonsOnBasketDishCard(currentItem.id);
   updateBadge();
 }
 
@@ -134,12 +136,19 @@ function deleteDishesOfSameKind(id) {
 Update UI buttons and badges
 ======================================================= */
 
+function updateButtonsOnDishCardsInCart() {
+  for (let i = 0; i < shoppingCart.length; i++) {
+    adaptButtonsOnBasketDishCard(shoppingCart[i].id);
+  }
+}
+
 function updateAddButton(id) {
   const addButton = document.getElementById(`add_to_cart_btn_${id}`);
 
   const existingDish = findItemInShoppingCart(id);
 
   if (existingDish) {
+    addButton.classList.add("orange"); 
     addButton.innerHTML = generateButtonContentHTML(existingDish);
   }
 }
@@ -148,6 +157,7 @@ function resetAddButton(id) {
   const currentAddButton = document.getElementById(`add_to_cart_btn_${id}`);
 
   if (!findItemInShoppingCart(id)) {
+    currentAddButton.classList.remove("orange"); 
     currentAddButton.innerHTML = "Add to basket";
   }
 }
@@ -157,6 +167,7 @@ function resetAllAddButtons() {
 
   for (let i = 0; i < addButtons.length; i++) {
     const addButton = addButtons[i];
+    addButton.classList.remove("orange"); 
     addButton.innerHTML = "Add to cart";
   }
 }

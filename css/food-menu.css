@@ -113,6 +113,10 @@ Menu section
   color: var(--text-color-medium-dark);
 }
 
+.add-to-cart-btn.orange {
+  color: var(--text-color-medium-dark); 
+}
+
 /* ===============================================================
 Media Queries
 =================================================================*/
