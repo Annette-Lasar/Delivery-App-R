@@ -80,7 +80,6 @@ function addToCart(id) {
 
   updateAddButton(currentDish.id);
   renderCart();
-  // adaptButtonsOnBasketDishCard(currentDish.id);
   renderPrices();
   updateBadge();
 }
@@ -94,7 +93,6 @@ function increaseAmount(id) {
 
   renderCart();
   renderPrices();
-  // adaptButtonsOnBasketDishCard(currentItem.id);
   updateBadge();
 }
 
@@ -111,7 +109,6 @@ function decreaseAmount(id) {
 
   renderCart();
   renderPrices();
-  // adaptButtonsOnBasketDishCard(currentItem.id);
   updateBadge();
 }
 
