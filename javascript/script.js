@@ -76,6 +76,7 @@ function addToCart(id) {
   } else {
     const newDish = createNewDish(currentDish);
     shoppingCart.push(newDish);
+    console.log("Warenkorb: ", newDish); 
   }
 
   updateAddButton(currentDish.id);

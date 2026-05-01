@@ -1,7 +1,5 @@
 function findItemInShoppingCart(id) {
-  return shoppingCart.find(function (dish) {
-    return dish.id === id;
-  });
+  return shoppingCart.find((d) => d.id === id);
 }
 
 function showContainer(id) {
